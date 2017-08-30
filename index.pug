@@ -1,0 +1,215 @@
+section.content
+  h1.content__heading Infrastruktur Bestellung
+  p.content__lede Weitere Angaben zu ihrer Raumreservation:
+
+  form.content__form.contact-form
+  
+    .testing
+      p Informationen zum Anlass
+
+    .contact-form__input-group
+      label.contact-form__label(
+        for="anlassname"
+      ) Veranstaltung
+      input#name.contact-form__input.contact-form__input--text(
+        name="anlassname"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="date"
+      ) Datum
+      input#name.contact-form__input.contact-form__input--text(
+        name="date"
+        type="text"
+      )
+      
+    .contact-form__input-group
+      label.contact-form__label(
+        for="time"
+      ) Zeit
+      input#name.contact-form__input.contact-form__input--text(
+        name="time"
+        type="text"
+      )
+
+    .contact-form__input-group
+      label.contact-form__label(
+        for="subject"
+      ) Veranstaltungsort?
+      select#subject.contact-form__input.contact-form__input--select(
+        name="subject"
+      )
+        option Sitzungszimmer Altbau
+        option Sitzungszimmer Direktion
+    .contact-form__input-group
+      label.contact-form__label(
+        for="anzahl"
+      ) Anzahl Teilnehmer
+      input#name.contact-form__input.contact-form__input--text(
+        name="anzahl"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="organisator"
+      ) Veranstalter?
+      select#subject.contact-form__input.contact-form__input--select(
+        name="organisator"
+      )
+        option 2580 Radiologie
+        option 1105 Infrastruktur
+        option 0000 Extern
+    .testing2
+      p Ansprechsperson
+    .contact-form__input-group
+      label.contact-form__label(
+        for="ansprname"
+      ) Name
+      input#name.contact-form__input.contact-form__input--text(
+        name="ansprname"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="ansprtel"
+      ) Tel.
+      input#name.contact-form__input.contact-form__input--text(
+        name="ansprtel"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="anspremail"
+      ) Email Addresse
+      input#email.contact-form__input.contact-form__input--email(
+        name="anspremail"
+        type="email"
+      )
+    .testing2
+      p Referent
+    .contact-form__input-group
+      label.contact-form__label(
+        for="refname"
+      ) Name
+      input#name.contact-form__input.contact-form__input--text(
+        name="refname"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="reftel"
+      ) Tel.
+      input#name.contact-form__input.contact-form__input--text(
+        name="reftel"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="refemail"
+      ) Email Addresse
+      input#email.contact-form__input.contact-form__input--email(
+        name="refemail"
+        type="email"
+      )
+    .testing
+      p Getränke und Verpflegung 
+    .contact-form__input-group
+      p.contact-form__label--checkbox-group Ich brauche:
+      br
+      input#snacks-pizza.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="mineralwasser"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-mineralwasser"
+      ) Mineralwasser
+      input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="orangensaft"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-orangensaft"
+      ) Orangensaft
+      input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="kaffeemaschine"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-kaffeemaschine"
+      ) Kaffeemaschine
+      br 
+      input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="fruchtekorb1"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-fruchtekorb1"
+      ) Früchtekorb mini 15.- 
+      input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="fruchtekorb2"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-fruchtekorb2"
+      ) Früchtekorb midi 25.- 
+      input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+        name="snacks"
+        type="checkbox"
+        value="fruchtekorb3"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="snacks-fruchtekorb3"
+      ) Früchtekorb maxi 35.- 
+      .text Bei weiteren Verpflegungswünschen füllen sie bitte folgendes Formular (Link) aus. 
+      
+    .testing
+      p Infrastruktur (Versteckt wenn Bedingung)
+      input#room-style.contact-form__input.contact-form__input--checkbox(
+        name="roomstyle"
+        type="checkbox"
+        value="kinobestuhlung"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="roomstyle-kinobestuhlung"
+      ) Kinobestuhlung
+      input#room-style.contact-form__input.contact-form__input--checkbox(
+        name="roomstyle"
+        type="checkbox"
+        value="trennwand"
+      )
+      label.contact-form__label.contact-form__label--checkbox(
+        for="roomstyle-trennwand"
+      ) Trennwand
+    .contact-form__input-group
+      label.contact-form__label(
+        for="message"
+      ) Andere:
+      textarea#message.contact-form__input.contact-form__input--textarea(
+        name="message"
+        rows="6"
+        cols="65"
+      )
+
+
+      
+    //- A hidden input to demonstrate that these are grabbed as well.
+    input(
+      name="secret"
+      type="hidden"
+      value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"
+    )
+
+    button.contact-form__button(
+      type="submit"
+    ) Absenden
+
+.results
+  h2.results__heading Form Data
+  pre.results__display-wrapper
+    code.results__display
