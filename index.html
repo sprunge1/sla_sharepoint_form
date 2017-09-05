@@ -1,33 +1,26 @@
 <!DOCTYPE html>
-
 <html >
-
 <head>
-  
-<meta charset="UTF-8">
-  
-<title>How to Get Form Field Data as JSON Using Plain JavaScript</title>
-  
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8">
+  <title>Infra SLA </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Lato:300|Open+Sans" rel="stylesheet">
   
   
-
-<link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/style.css">
 
   
 </head>
 
-
 <body>
   
-
 <section class="content">
-  
-<h1 class="content__heading">Infrastruktur Bestellung</h1>
+  <h1 class="content__heading">Infrastruktur Bestellung</h1>
   <p class="content__lede">Weitere Angaben zu ihrer Raumreservation:</p>
   <form class="content__form contact-form">
+    <!-- Hash zur Authentifizierung-->
+    <input name="hash" type="hidden" value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"/>
+    <input name="serviceVersion" type="hidden" value="0.5"/>
     <div class="testing">
       <p>Informationen zum Anlass</p>
     </div>
@@ -66,16 +59,20 @@
       <p>Ansprechsperson</p>
     </div>
     <div class="contact-form__input-group">
-      <label class="contact-form__label" for="ansprname">Name</label>
-      <input class="contact-form__input contact-form__input--text" id="name" name="ansprname" type="text"/>
+      <label class="contact-form__label" for="callerName">Nachname</label>
+      <input class="contact-form__input contact-form__input--text" id="name" name="callerName" type="text"/>
     </div>
     <div class="contact-form__input-group">
-      <label class="contact-form__label" for="ansprtel">Tel.</label>
-      <input class="contact-form__input contact-form__input--text" id="name" name="ansprtel" type="text"/>
+      <label class="contact-form__label" for="callerFirstName">Vorname</label>
+      <input class="contact-form__input contact-form__input--text" id="name" name="callerFirstName" type="text"/>
     </div>
     <div class="contact-form__input-group">
-      <label class="contact-form__label" for="anspremail">Email Addresse</label>
-      <input class="contact-form__input contact-form__input--email" id="email" name="anspremail" type="email"/>
+      <label class="contact-form__label" for="callerPhone">Tel.</label>
+      <input class="contact-form__input contact-form__input--text" id="name" name="callerPhone" type="text"/>
+    </div>
+    <div class="contact-form__input-group">
+      <label class="contact-form__label" for="callerEmail">Email Addresse</label>
+      <input class="contact-form__input contact-form__input--email" id="email" name="callerEmail" type="email"/>
     </div>
     <div class="testing2">
       <p>Referent</p>
@@ -110,6 +107,9 @@
       <input class="contact-form__input contact-form__input--checkbox" id="snacks-cake" name="snacks" type="checkbox" value="fruchtekorb3"/>
       <label class="contact-form__label contact-form__label--checkbox" for="snacks-fruchtekorb3">Früchtekorb maxi 35.- </label>
       <div class="text">Bei weiteren Verpflegungswünschen füllen sie bitte folgendes Formular (Link) aus. </div>
+      <label name="filePicker">Choose or drag a file</label>
+      <input type="file" id="filePicker"/>
+      <textarea id="base64textarea" placeholder="Base64 will appear here" cols="50" rows="15" style="display:none"></textarea>
     </div>
     <div class="testing">
       <p>Infrastruktur (Versteckt wenn Bedingung)</p>
@@ -119,10 +119,9 @@
       <label class="contact-form__label contact-form__label--checkbox" for="roomstyle-trennwand">Trennwand</label>
     </div>
     <div class="contact-form__input-group">
-      <label class="contact-form__label" for="message">Andere:</label>
-      <textarea class="contact-form__input contact-form__input--textarea" id="message" name="message" rows="6" cols="65"></textarea>
+      <label class="contact-form__label" for="bemerkunginfra">Andere:</label>
+      <textarea class="contact-form__input contact-form__input--textarea" id="message" name="bemerkunginfra" rows="6" cols="65"></textarea>
     </div>
-    <input name="secret" type="hidden" value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"/>
     <button class="contact-form__button" type="submit">Absenden</button>
   </form>
 </section>

@@ -3,7 +3,17 @@ section.content
   p.content__lede Weitere Angaben zu ihrer Raumreservation:
 
   form.content__form.contact-form
-  
+    // Hash zur Authentifizierung
+    input(
+      name="hash"
+      type="hidden"
+      value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"
+    )
+    input(
+      name="serviceVersion"
+      type="hidden"
+      value="0.5"
+    )
     .testing
       p Informationen zum Anlass
 
@@ -64,26 +74,34 @@ section.content
       p Ansprechsperson
     .contact-form__input-group
       label.contact-form__label(
-        for="ansprname"
-      ) Name
+        for="callerName"
+      ) Nachname
       input#name.contact-form__input.contact-form__input--text(
-        name="ansprname"
+        name="callerName"
         type="text"
       )
     .contact-form__input-group
       label.contact-form__label(
-        for="ansprtel"
+        for="callerFirstName"
+      ) Vorname
+      input#name.contact-form__input.contact-form__input--text(
+        name="callerFirstName"
+        type="text"
+      )
+    .contact-form__input-group
+      label.contact-form__label(
+        for="callerPhone"
       ) Tel.
       input#name.contact-form__input.contact-form__input--text(
-        name="ansprtel"
+        name="callerPhone"
         type="text"
       )
     .contact-form__input-group
       label.contact-form__label(
-        for="anspremail"
+        for="callerEmail"
       ) Email Addresse
       input#email.contact-form__input.contact-form__input--email(
-        name="anspremail"
+        name="callerEmail"
         type="email"
       )
     .testing2
@@ -168,6 +186,10 @@ section.content
       ) Früchtekorb maxi 35.- 
       .text Bei weiteren Verpflegungswünschen füllen sie bitte folgendes Formular (Link) aus. 
       
+      label(name="filePicker") Choose or drag a file
+      input(type="file", id="filePicker")
+      textarea(id="base64textarea" placeholder="Base64 will appear here" cols="50" rows="15" style="display:none;")
+      
     .testing
       p Infrastruktur (Versteckt wenn Bedingung)
       input#room-style.contact-form__input.contact-form__input--checkbox(
@@ -188,22 +210,16 @@ section.content
       ) Trennwand
     .contact-form__input-group
       label.contact-form__label(
-        for="message"
+        for="bemerkunginfra"
       ) Andere:
       textarea#message.contact-form__input.contact-form__input--textarea(
-        name="message"
+        name="bemerkunginfra"
         rows="6"
         cols="65"
       )
 
 
-      
-    //- A hidden input to demonstrate that these are grabbed as well.
-    input(
-      name="secret"
-      type="hidden"
-      value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"
-    )
+     
 
     button.contact-form__button(
       type="submit"

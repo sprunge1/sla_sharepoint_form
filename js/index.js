@@ -1,45 +1,51 @@
 'use strict';
 
 /**
- * Überprüft dass die Elemente gültige 'name' und 'value' Eigenschaften besitzen.
- * @param  {Element} element  Das zu überprüfende Element
- * @return {Bool}             Wahr wenn das Element einen gültigen Input besitzt.
+ * Checks that an element has a non-empty `name` and `value` property.
+ * @param  {Element} element  the element to check
+ * @return {Bool}             true if the element is an input, false if not
  */
-const isValidElement = element => {
+var isValidElement = function isValidElement(element) {
   return element.name && element.value;
 };
 
 /**
- * Überprüft ob der Wert des Elements gespeichert werden kann (Bsp. nicht eine unselektierte Checkbox).
- * @param  {Element} element  Das zu überprüfende Element
- * @return {Boolean}          Wahr, wenn der Wert hinzugefügt werden soll, falsch wenn nicht.
+ * Checks if an element’s value can be saved (e.g. not an unselected checkbox).
+ * @param  {Element} element  the element to check
+ * @return {Boolean}          true if the value should be added, false if not
  */
-const isValidValue = element => {
-  return (!['checkbox', 'radio'].includes(element.type) || element.checked);
+var isValidValue = function isValidValue(element) {
+  return !['checkbox', 'radio'].includes(element.type) || element.checked;
 };
 
 /**
- * Überprüft ob der Input eine Chechbox ist, da diese mehrere Werte erlauben.
- * @param  {Element} element  Das zu überprüfende Element
- * @return {Boolean}          Wahr wenn das Element eine checkbox ist, falsch wenn nicht. 
+ * Checks if an input is a checkbox, because checkboxes allow multiple values.
+ * @param  {Element} element  the element to check
+ * @return {Boolean}          true if the element is a checkbox, false if not
  */
-const isCheckbox = element => element.type === 'checkbox';
+var isCheckbox = function isCheckbox(element) {
+  return element.type === 'checkbox';
+};
 
 /**
- * Überprüft ob der Input vom Typ 'select' mit dem attribut 'multiple' ist.
- * @param  {Element} element  Das zu überprüfende Element
- * @return {Boolean}          Wahr wenn das Element multiselect ist, falsch wenn nicht.
+ * Checks if an input is a `select` with the `multiple` attribute.
+ * @param  {Element} element  the element to check
+ * @return {Boolean}          true if the element is a multiselect, false if not
  */
-const isMultiSelect = element => element.options && element.multiple;
+var isMultiSelect = function isMultiSelect(element) {
+  return element.options && element.multiple;
+};
 
 /**
- * Nimmt die gewählten Optionen von einem multiselect als ein Array.
- * @param  {HTMLOptionsCollection} options  Die möglichen wählbaren Optionen
- * @return {Array}                          Output, Array der gewählten Optionen
+ * Retrieves the selected options from a multi-select as an array.
+ * @param  {HTMLOptionsCollection} options  the options for the select
+ * @return {Array}                          an array of selected option values
  */
-const getSelectValues = options => [].reduce.call(options, (values, option) => {
-  return option.selected ? values.concat(option.value) : values;
-}, []);
+var getSelectValues = function getSelectValues(options) {
+  return [].reduce.call(options, function (values, option) {
+    return option.selected ? values.concat(option.value) : values;
+  }, []);
+};
 
 /**
  * A more verbose implementation of `formToJSON()` to explain how it works.
@@ -50,29 +56,29 @@ const getSelectValues = options => [].reduce.call(options, (values, option) => {
  * @param  {HTMLFormControlsCollection} elements  the form elements
  * @return {Object}                               form data as an object literal
  */
-const formToJSON_deconstructed = elements => {
-  
+var formToJSON_deconstructed = function formToJSON_deconstructed(elements) {
+
   // This is the function that is called on each element of the array.
-  const reducerFunction = (data, element) => {
-    
+  var reducerFunction = function reducerFunction(data, element) {
+
     // Add the current field to the object.
     data[element.name] = element.value;
-    
+
     // For the demo only: show each step in the reducer’s progress.
     console.log(JSON.stringify(data));
 
     return data;
   };
-  
+
   // This is used as the initial value of `data` in `reducerFunction()`.
-  const reducerInitialValue = {};
-  
+  var reducerInitialValue = {};
+
   // To help visualize what happens, log the inital value, which we know is `{}`.
   console.log('Initial `data` value:', JSON.stringify(reducerInitialValue));
-  
+
   // Now we reduce by `call`-ing `Array.prototype.reduce()` on `elements`.
-  const formData = [].reduce.call(elements, reducerFunction, reducerInitialValue);
-  
+  var formData = [].reduce.call(elements, reducerFunction, reducerInitialValue);
+
   // The result is then returned for use elsewhere.
   return formData;
 };
@@ -82,46 +88,87 @@ const formToJSON_deconstructed = elements => {
  * @param  {HTMLFormControlsCollection} elements  the form elements
  * @return {Object}                               form data as an object literal
  */
-const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+var formToJSON = function formToJSON(elements) {
+  return [].reduce.call(elements, function (data, element) {
 
-  // Make sure the element has the required properties and should be added.
-  if (isValidElement(element) && isValidValue(element)) {
+    // Make sure the element has the required properties and should be added.
+    if (isValidElement(element) && isValidValue(element)) {
 
-    /*
-     * Some fields allow for more than one value, so we need to check if this
-     * is one of those fields and, if so, store the values as an array.
-     */
-    if (isCheckbox(element)) {
-      data[element.name] = (data[element.name] || []).concat(element.value);
-    } else if (isMultiSelect(element)) {
-      data[element.name] = getSelectValues(element);
-    } else {
-      data[element.name] = element.value;
+      /*
+       * Some fields allow for more than one value, so we need to check if this
+       * is one of those fields and, if so, store the values as an array.
+       */
+      if (isCheckbox(element)) {
+        data[element.name] = (data[element.name] || []).concat(element.value);
+      } else if (isMultiSelect(element)) {
+        data[element.name] = getSelectValues(element);
+      } else {
+        data[element.name] = element.value;
+      }
     }
-  }
 
-  return data;
-}, {});
+    return data;
+  }, {});
+};
 
 /**
  * A handler function to prevent default submission and run our custom script.
  * @param  {Event} event  the submit event triggered by the user
  * @return {void}
  */
-const handleFormSubmit = event => {
-  
+var handleFormSubmit = function handleFormSubmit(event) {
+
   // Stop the form from submitting since we’re handling that with AJAX.
   event.preventDefault();
-  
-  // Call our function to get the form data.
-  const data = formToJSON(form.elements);
 
+  // Call our function to get the form data.
+  var data = formToJSON(form.elements);
+
+  // Codierung der Datei
+  var handleFileSelect = function handleFileSelect(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload = function (readerEvt) {
+        var binaryString = readerEvt.target.result;
+        document.getElementById("base64textarea").value = btoa(binaryString);
+      };
+
+      reader.readAsBinaryString(file);
+    }
+  };
+
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('filePicker').addEventListener('change', handleFileSelect, false);
+  } else {
+    alert('The File APIs are not fully supported in this browser.');
+  }
+
+  //Test um codierte Datei auszulesen
+  var encodeddoc = document.getElementById('base64textarea').value;
+  // Ändern der Daten um die gewünschten Felder zu erreichen
+  //dazu werden die gewünschten Elemente in ein neues gepackt und danach gelöscht.
+
+  //noteInfra für Infrastruktur
+  data.noteInfra = [].concat(data.roomstyle, data.bemerkunginfra);
+
+  delete data.roomstyle;
+  delete data.bemerkunginfra;
+
+  //noteHotel
+  data.noteHotel = [].concat(data.snacks);
+  delete data.snacks;
+  //Dateianhang
+  data.attachmentBinaryData = [].concat(encodeddoc);
   // Demo only: print the form data onscreen as a formatted JSON object.
-  const dataContainer = document.getElementsByClassName('results__display')[0];
-  
+  var dataContainer = document.getElementsByClassName('results__display')[0];
+
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
   dataContainer.textContent = JSON.stringify(data, null, "  ");
-  
+
   // ...this is where we’d actually do something with the form data...
 };
 
@@ -130,5 +177,5 @@ const handleFormSubmit = event => {
  * its class name, then attach the `handleFormSubmit()` function to the 
  * `submit` event.
  */
-const form = document.getElementsByClassName('contact-form')[0];
+var form = document.getElementsByClassName('contact-form')[0];
 form.addEventListener('submit', handleFormSubmit);
